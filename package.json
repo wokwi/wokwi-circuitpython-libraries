@@ -1,0 +1,23 @@
+{
+  "name": "wokwi-circuitpython-libraries",
+  "version": "1.0.0",
+  "description": "CircuitPython Libraries packed for Wokwi",
+  "main": "src/update.js",
+  "scripts": {
+    "start": "node src/update.js"
+  },
+  "dependencies": {
+    "@zip.js/zip.js": "^2.6.65",
+    "rimraf": "^4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wokwi/wokwi-circuitpython-libraries.git"
+  },
+  "author": "Uri Shaked",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wokwi/wokwi-circuitpython-libraries/issues"
+  },
+  "homepage": "https://github.com/wokwi/wokwi-circuitpython-libraries#readme"
+}
