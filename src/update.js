@@ -43,13 +43,13 @@ function packFile(sourceFile, targetFile) {
  */
 function packLibrary(sourceDir, targetDir, prefix) {
   const output = fs.openSync(targetDir, 'w');
-  queue = fs.readdirSync(sourceDir);
+  queue = fs.readdirSync(sourceDir).sort();
   while (queue.length) {
     file = queue.shift();
     const filePath = path.join(sourceDir, file);
     if (fs.lstatSync(filePath).isDirectory()) {
       queue.push(
-        ...fs.readdirSync(filePath).map((item) => `${filePath.substr(sourceDir.length)}/${item}`)
+        ...fs.readdirSync(filePath).sort().map((item) => `${filePath.substring(sourceDir.length)}/${item}`)
       );
       continue;
     }
@@ -89,7 +89,7 @@ function packLibraries(sourceDir, targetDir, indexFile) {
     .readFileSync(path.join(sourceDir, 'VERSIONS.txt'), 'utf-8')
     .split('\n')[0]
     .trim();
-  for (const lib of fs.readdirSync(libRoot)) {
+  for (const lib of fs.readdirSync(libRoot).sort()) {
     const name = lib.replace('.mpy', '');
     console.log(`-> ${name}`);
     const indexEntry = indexFile[name];

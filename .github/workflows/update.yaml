@@ -25,7 +25,7 @@ jobs:
           git config user.email "librarian@wokwi.com"
           git config user.name "Wokwi Update"
           if ! git diff-index --quiet HEAD; then
-            git commit -m "sync $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git commit -m "update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           fi
       - name: Push changes
         run: git push
