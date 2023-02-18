@@ -1,0 +1,31 @@
+name: Update CircuitPython Libraries Task
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 13 * * 0'
+
+jobs:
+  exporter:
+    runs-on: ubuntu-latest
+    name: Update CircuitPython Libraries
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install NPM dependencies
+        run: npm ci
+      - name: Update libraries
+        run: npm start
+      - name: Commit changes
+        run: |
+          git add -A
+          git config user.email "librarian@wokwi.com"
+          git config user.name "Wokwi Update"
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "sync $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          fi
+      - name: Push changes
+        run: git push
