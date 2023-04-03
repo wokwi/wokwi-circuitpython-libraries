@@ -93,6 +93,9 @@ function packLibraries(sourceDir, targetDir, indexFile) {
     const name = lib.replace('.mpy', '');
     console.log(`-> ${name}`);
     const indexEntry = indexFile[name];
+    if (!indexEntry) {
+      continue;
+    }
     libraryIndex.push({ name, deps: indexEntry.dependencies, version: indexEntry.version });
     const packedName = path.join(targetDir, `${name}.mpylib`);
     if (lib.endsWith('.mpy')) {
